@@ -3,8 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link href="webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="webjars/bootstrap/js/bootstrap.min.js"></script>
+
 </head>
+
 <body>
-    <h1>my recipes</h1>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h1 class="panel-title">My Recipes!</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>Url</th>
+                                <th>Difficulty</th>
+                            </tr>
+                            </thead>
+                            <tr th:each="recipe : ${recipes}">
+                                <td th:text="${recipe.id}">334</td>
+                                <td th:text="${recipe.description}">Tasty Goodnees 3</td>
+                                <td th:text="${recipe.url}">1</td>
+                                <td th:text="${recipe.difficulty}">1</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
+
 </html>
