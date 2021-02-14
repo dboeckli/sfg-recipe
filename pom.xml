@@ -108,6 +108,14 @@
                         <argLine>-Xmx1024m</argLine>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
 
