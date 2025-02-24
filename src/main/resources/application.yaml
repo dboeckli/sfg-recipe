@@ -1,3 +1,22 @@
+server:
+  port: 8080
+
+management:
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+
 spring:
   
   application:
@@ -19,3 +38,9 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
+      
+  docker:
+    compose:
+      enabled: false
+      stop:
+        command: down    
