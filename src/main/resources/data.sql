@@ -1,0 +1,44 @@
+INSERT INTO ingredient (description) VALUES ('Avocado');
+INSERT INTO ingredient (description) VALUES ('Salt');
+INSERT INTO ingredient (description) VALUES ('Lime Juice');
+INSERT INTO ingredient (description) VALUES ('Lemon Juice');
+INSERT INTO ingredient (description) VALUES ('Red Onion');
+INSERT INTO ingredient (description) VALUES ('Green Onion');
+INSERT INTO ingredient (description) VALUES ('Serrano Chili');
+INSERT INTO ingredient (description) VALUES ('Cilantro');
+INSERT INTO ingredient (description) VALUES ('Black Pepper');
+INSERT INTO ingredient (description) VALUES ('Tomato');
+INSERT INTO ingredient (description) VALUES ('Radish');
+INSERT INTO ingredient (description) VALUES ('Jicama');
+INSERT INTO ingredient (description) VALUES ('Tortilla Chips');
+
+INSERT INTO ingredient (description) VALUES ('Ancho Chili Powder');
+INSERT INTO ingredient (description) VALUES ('Dried Oregano');
+INSERT INTO ingredient (description) VALUES ('Dried Cumin');
+INSERT INTO ingredient (description) VALUES ('Sugar');
+INSERT INTO ingredient (description) VALUES ('Garlic');
+INSERT INTO ingredient (description) VALUES ('Orange Zest');
+INSERT INTO ingredient (description) VALUES ('Orange Juice');
+INSERT INTO ingredient (description) VALUES ('Olive Oil');
+INSERT INTO ingredient (description) VALUES ('Chicken Zhighs');
+INSERT INTO ingredient (description) VALUES ('Corn Tortilla');
+INSERT INTO ingredient (description) VALUES ('Baby Arugula');
+INSERT INTO ingredient (description) VALUES ('Cherry Tomato');
+INSERT INTO ingredient (description) VALUES ('Sour Cream');
+INSERT INTO ingredient (description) VALUES ('Milk');
+INSERT INTO ingredient (description) VALUES ('Lime');
+
+INSERT INTO category (description) VALUES ('American');
+INSERT INTO category (description) VALUES ('Italien');
+INSERT INTO category (description) VALUES ('Mexican');
+INSERT INTO category (description) VALUES ('Fast Food');
+
+INSERT INTO unit_of_measure (description) VALUES ('Teaspoon');
+INSERT INTO unit_of_measure (description) VALUES ('Tablespoon');
+INSERT INTO unit_of_measure (description) VALUES ('Cup');
+INSERT INTO unit_of_measure (description) VALUES ('Pinch');
+INSERT INTO unit_of_measure (description) VALUES ('Ounce');
+INSERT INTO unit_of_measure (description) VALUES ('Dash');
+INSERT INTO unit_of_measure (description) VALUES ('Piece');
+INSERT INTO unit_of_measure (description) VALUES ('Pound');
+INSERT INTO unit_of_measure (description) VALUES ('Pint');
