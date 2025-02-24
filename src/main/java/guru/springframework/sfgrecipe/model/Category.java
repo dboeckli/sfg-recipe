@@ -1,9 +1,13 @@
 package guru.springframework.sfgrecipe.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 public class Category {
 
@@ -15,28 +19,4 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipies;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<Recipe> getRecipies() {
-        return recipies;
-    }
-
-    public void setRecipies(Set<Recipe> recipies) {
-        this.recipies = recipies;
-    }
 }

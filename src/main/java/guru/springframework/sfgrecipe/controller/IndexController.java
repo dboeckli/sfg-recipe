@@ -5,6 +5,7 @@ import guru.springframework.sfgrecipe.model.UnitOfMeasure;
 import guru.springframework.sfgrecipe.repository.CategoryRepository;
 import guru.springframework.sfgrecipe.repository.UnitOfMeasureRepository;
 import guru.springframework.sfgrecipe.service.RecipeService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,19 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    final CategoryRepository categoryRepository;
+    final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    private RecipeService recipeService;
-
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeService recipeService) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
-        this.recipeService = recipeService;
-    }
+    final RecipeService recipeService;
 
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage(Model model) {

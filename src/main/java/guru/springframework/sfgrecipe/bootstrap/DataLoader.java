@@ -5,24 +5,21 @@ import guru.springframework.sfgrecipe.model.Difficulty;
 import guru.springframework.sfgrecipe.model.Recipe;
 import guru.springframework.sfgrecipe.repository.CategoryRepository;
 import guru.springframework.sfgrecipe.repository.RecipeRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    private final RecipeRepository recipeRepository;
-    private final CategoryRepository categoryRepository;
-
-    public DataLoader(RecipeRepository recipeRepository, CategoryRepository categoryRepository) {
-        this.recipeRepository = recipeRepository;
-        this.categoryRepository = categoryRepository;
-    }
+    final RecipeRepository recipeRepository;
+    final CategoryRepository categoryRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         loadData();
     }
 
