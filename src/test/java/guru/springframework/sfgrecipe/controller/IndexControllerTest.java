@@ -4,28 +4,24 @@ import guru.springframework.sfgrecipe.model.Category;
 import guru.springframework.sfgrecipe.model.Recipe;
 import guru.springframework.sfgrecipe.model.UnitOfMeasure;
 import guru.springframework.sfgrecipe.repository.CategoryRepository;
-import guru.springframework.sfgrecipe.repository.RecipeRepository;
 import guru.springframework.sfgrecipe.repository.UnitOfMeasureRepository;
 import guru.springframework.sfgrecipe.service.RecipeService;
-import guru.springframework.sfgrecipe.service.RecipeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.matchers.Any;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 

@@ -23,16 +23,15 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         loadData();
-
-
     }
 
     private void loadData() {
 
         Category americanCategory = categoryRepository.findByDescription("American").get();
         Category mexicanCategory = categoryRepository.findByDescription("Mexican").get();
+
+        log.info("Categories: {}", categoryRepository.count());
 
         Recipe guacamole = new Recipe();
         guacamole.setDescription("Guacamole");
@@ -49,6 +48,7 @@ public class DataLoader implements CommandLineRunner {
         tacos.getCategories().add(americanCategory);
         recipeRepository.save(tacos);
 
+        log.info("Saved {} recipes", recipeRepository.count());
         log.info("init done");
    }
 }
