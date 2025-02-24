@@ -17,12 +17,4 @@ public class UnitOfMeasure {
     private Long id;
 
     private String description;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
