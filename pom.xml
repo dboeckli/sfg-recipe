@@ -42,7 +42,7 @@
         <webjars-locator.version>0.52</webjars-locator.version>
         <webjars-source-dir>src/main/resources/templates/webjars/bootstrap</webjars-source-dir>
 
-        <logbook.version>3.10.0</logbook.version>
+        <logbook.version>3.11.0</logbook.version>
         <logstash-logback.version>8.0</logstash-logback.version>
 
         <!-- Sonar -->
