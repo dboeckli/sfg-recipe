@@ -15,7 +15,6 @@ spec:
       labels:
         {{- include "application-template.selectorLabels" . | nindent 8 }}
     spec:
-      initContainers:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
