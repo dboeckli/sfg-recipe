@@ -4,7 +4,7 @@ This application is a Spring Boot-based recipe management system. It includes a 
 
 ## Features
 
-- Web interface accessible at `http://localhost:8080`
+- Web interface accessible at `http://localhost:8080` or `http://localhost:30080`
 - Responsive design using Bootstrap
 - Server-side rendering with Thymeleaf
 - Data persistence using H2 in-memory database
