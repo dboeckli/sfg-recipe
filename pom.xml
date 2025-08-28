@@ -41,7 +41,7 @@
         <docker.image.tag>development</docker.image.tag> <!-- for feature branches -->
         <docker.repo>local</docker.repo>
 
-        <webjars-bootstrap.version>5.3.7</webjars-bootstrap.version>
+        <webjars-bootstrap.version>5.3.8</webjars-bootstrap.version>
         <webjars-locator.version>0.52</webjars-locator.version>
         <webjars-source-dir>src/main/resources/templates/webjars/bootstrap</webjars-source-dir>
 
