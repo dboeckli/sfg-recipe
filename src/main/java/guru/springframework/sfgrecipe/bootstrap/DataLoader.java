@@ -7,6 +7,7 @@ import guru.springframework.sfgrecipe.repository.CategoryRepository;
 import guru.springframework.sfgrecipe.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class DataLoader implements CommandLineRunner {
     final CategoryRepository categoryRepository;
 
     @Override
-    public void run(String... args) {
+    public void run(String @NonNull ... args) {
         loadData();
     }
 
