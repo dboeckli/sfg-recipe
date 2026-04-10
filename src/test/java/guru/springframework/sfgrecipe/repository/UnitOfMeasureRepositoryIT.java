@@ -12,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 class UnitOfMeasureRepositoryIT {
 
-    @Autowired
-    UnitOfMeasureRepository unitOfMeasureRepository;
+	@Autowired
+	UnitOfMeasureRepository unitOfMeasureRepository;
 
-    @Test
-    void findByDescriptionByTeaspoon() {
-        Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon");
-        assertEquals("Teaspoon", unitOfMeasure.get().getDescription());
-    }
+	@Test
+	void findByDescriptionByTeaspoon() {
+		Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon");
+		assertEquals("Teaspoon", unitOfMeasure.get().getDescription());
+	}
 
-    @Test
-    void findByDescriptionByCup() {
-        Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Cup");
-        assertEquals("Cup", unitOfMeasure.get().getDescription());
-    }
+	@Test
+	void findByDescriptionByCup() {
+		Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Cup");
+		assertEquals("Cup", unitOfMeasure.get().getDescription());
+	}
 
 }

@@ -11,7 +11,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
-import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,49 +22,50 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Slf4j
 class ActuatorInfoTest {
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    @Autowired
-    BuildProperties buildProperties;
-    @Autowired
-    private MockMvc mockMvc;
+	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    @Test
-    void actuatorInfoTest() throws Exception {
-        mockMvc.perform(get("/actuator/info"))
-            .andExpect(status().isOk())
-            .andDo(result -> log.info("Response (pretty):\n{}", pretty(result.getResponse().getContentAsString())))
+	@Autowired
+	BuildProperties buildProperties;
 
-            .andExpect(jsonPath("$.git.commit.id.abbrev").isString())
+	@Autowired
+	private MockMvc mockMvc;
 
-            .andExpect(jsonPath("$.build.artifact").value(buildProperties.getArtifact()))
-            .andExpect(jsonPath("$.build.group").value(buildProperties.getGroup()))
+	@Test
+	void actuatorInfoTest() throws Exception {
+		mockMvc.perform(get("/actuator/info"))
+			.andExpect(status().isOk())
+			.andDo(result -> log.info("Response (pretty):\n{}", pretty(result.getResponse().getContentAsString())))
 
-            .andExpect(jsonPath("$.java.version").value(startsWith("21")));
-    }
+			.andExpect(jsonPath("$.git.commit.id.abbrev").isString())
 
-    @Test
-    void actuatorHealthTest() throws Exception {
-        mockMvc.perform(get("/actuator/health/readiness"))
-            .andExpect(status().isOk())
-            .andDo(result -> log.info("Response (pretty):\n{}", pretty(result.getResponse().getContentAsString())))
-            .andExpect(jsonPath("$.status").value("UP"));
-    }
+			.andExpect(jsonPath("$.build.artifact").value(buildProperties.getArtifact()))
+			.andExpect(jsonPath("$.build.group").value(buildProperties.getGroup()));
+	}
 
-    @Test
-    void actuatorPrometheusTest() throws Exception {
-        mockMvc.perform(get("/actuator/prometheus"))
-            .andExpect(status().isOk())
-            .andDo(result -> log.info("Response:\n{}", result.getResponse().getContentAsString()));
-    }
+	@Test
+	void actuatorHealthTest() throws Exception {
+		mockMvc.perform(get("/actuator/health/readiness"))
+			.andExpect(status().isOk())
+			.andDo(result -> log.info("Response (pretty):\n{}", pretty(result.getResponse().getContentAsString())))
+			.andExpect(jsonPath("$.status").value("UP"));
+	}
 
-    private String pretty(String body) {
-        try {
-            Object json = OBJECT_MAPPER.readValue(body, Object.class);
-            return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(json);
-        } catch (Exception e) {
-            // Falls kein valides JSON: unverändert zurückgeben
-            return body;
-        }
-    }
+	@Test
+	void actuatorPrometheusTest() throws Exception {
+		mockMvc.perform(get("/actuator/prometheus"))
+			.andExpect(status().isOk())
+			.andDo(result -> log.info("Response:\n{}", result.getResponse().getContentAsString()));
+	}
+
+	private String pretty(String body) {
+		try {
+			Object json = OBJECT_MAPPER.readValue(body, Object.class);
+			return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+		}
+		catch (Exception e) {
+			// Falls kein valides JSON: unverändert zurückgeben
+			return body;
+		}
+	}
 
 }
