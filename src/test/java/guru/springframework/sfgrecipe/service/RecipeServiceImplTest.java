@@ -15,27 +15,27 @@ import static org.mockito.Mockito.when;
 
 class RecipeServiceImplTest {
 
-	RecipeServiceImpl recipeService;
+    RecipeServiceImpl recipeService;
 
-	@Mock
-	RecipeRepository recipeRepository;
+    @Mock
+    RecipeRepository recipeRepository;
 
-	@BeforeEach
-	public void setup() {
-		MockitoAnnotations.openMocks(this);
-		recipeService = new RecipeServiceImpl(recipeRepository);
-	}
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+        recipeService = new RecipeServiceImpl(recipeRepository);
+    }
 
-	@Test
-	void getAllRecipe() {
-		Recipe recipe = new Recipe();
-		HashSet<Recipe> recipeData = new HashSet();
-		recipeData.add(recipe);
+    @Test
+    void getAllRecipe() {
+        Recipe recipe = new Recipe();
+        HashSet<Recipe> recipeData = new HashSet();
+        recipeData.add(recipe);
 
-		when(recipeRepository.findAll()).thenReturn(recipeData);
+        when(recipeRepository.findAll()).thenReturn(recipeData);
 
-		List<Recipe> recipes = recipeService.getAllRecipe();
-		assertEquals(1, recipes.size());
-	}
+        List<Recipe> recipes = recipeService.getAllRecipe();
+        assertEquals(1, recipes.size());
+    }
 
 }

@@ -11,18 +11,18 @@ import java.math.BigDecimal;
 @Entity
 public class Ingredient {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String description;
+    private String description;
 
-	private BigDecimal amount;
+    private BigDecimal amount;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	private UnitOfMeasure unitOfMeasure;
+    @OneToOne(fetch = FetchType.EAGER)
+    private UnitOfMeasure unitOfMeasure;
 
-	@ManyToOne
-	private Recipe recipe;
+    @ManyToOne
+    private Recipe recipe;
 
 }

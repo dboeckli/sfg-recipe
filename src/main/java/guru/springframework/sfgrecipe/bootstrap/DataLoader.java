@@ -16,39 +16,39 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements CommandLineRunner {
 
-	final RecipeRepository recipeRepository;
+    final RecipeRepository recipeRepository;
 
-	final CategoryRepository categoryRepository;
+    final CategoryRepository categoryRepository;
 
-	@Override
-	public void run(String @NonNull ... args) {
-		loadData();
-	}
+    @Override
+    public void run(String @NonNull ... args) {
+        loadData();
+    }
 
-	private void loadData() {
+    private void loadData() {
 
-		Category americanCategory = categoryRepository.findByDescription("American").get();
-		Category mexicanCategory = categoryRepository.findByDescription("Mexican").get();
+        Category americanCategory = categoryRepository.findByDescription("American").get();
+        Category mexicanCategory = categoryRepository.findByDescription("Mexican").get();
 
-		log.info("Categories: {}", categoryRepository.count());
+        log.info("Categories: {}", categoryRepository.count());
 
-		Recipe guacamole = new Recipe();
-		guacamole.setDescription("Guacamole");
-		guacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
-		guacamole.setDifficulty(Difficulty.EASY);
-		guacamole.getCategories().add(americanCategory);
-		guacamole.getCategories().add(mexicanCategory);
-		recipeRepository.save(guacamole);
+        Recipe guacamole = new Recipe();
+        guacamole.setDescription("Guacamole");
+        guacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
+        guacamole.setDifficulty(Difficulty.EASY);
+        guacamole.getCategories().add(americanCategory);
+        guacamole.getCategories().add(mexicanCategory);
+        recipeRepository.save(guacamole);
 
-		Recipe tacos = new Recipe();
-		tacos.setDescription("Spicy Grilled Chicken Tacos");
-		tacos.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
-		tacos.setDifficulty(Difficulty.EASY);
-		tacos.getCategories().add(americanCategory);
-		recipeRepository.save(tacos);
+        Recipe tacos = new Recipe();
+        tacos.setDescription("Spicy Grilled Chicken Tacos");
+        tacos.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
+        tacos.setDifficulty(Difficulty.EASY);
+        tacos.getCategories().add(americanCategory);
+        recipeRepository.save(tacos);
 
-		log.info("Saved {} recipes", recipeRepository.count());
-		log.info("init done");
-	}
+        log.info("Saved {} recipes", recipeRepository.count());
+        log.info("init done");
+    }
 
 }

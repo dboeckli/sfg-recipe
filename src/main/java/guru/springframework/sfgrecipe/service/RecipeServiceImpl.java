@@ -12,13 +12,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
 
-	final RecipeRepository recipeRepository;
+    final RecipeRepository recipeRepository;
 
-	@Override
-	public List<Recipe> getAllRecipe() {
-		ArrayList<Recipe> recipees = new ArrayList<>();
-		recipeRepository.findAll().forEach(recipees::add);
-		return recipees;
-	}
+    @Override
+    public List<Recipe> getAllRecipe() {
+        ArrayList<Recipe> recipees = new ArrayList<>();
+        recipeRepository.findAll().forEach(recipees::add);
+        return recipees;
+    }
 
 }

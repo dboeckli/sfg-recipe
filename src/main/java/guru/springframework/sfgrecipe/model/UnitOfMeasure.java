@@ -12,10 +12,10 @@ import lombok.Setter;
 @Entity
 public class UnitOfMeasure {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String description;
+    private String description;
 
 }

@@ -9,14 +9,14 @@ import lombok.Setter;
 @Entity
 public class Notes {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Lob
-	private String recipeNotes;
+    @Lob
+    private String recipeNotes;
 
-	@OneToOne
-	private Recipe recipe;
+    @OneToOne
+    private Recipe recipe;
 
 }

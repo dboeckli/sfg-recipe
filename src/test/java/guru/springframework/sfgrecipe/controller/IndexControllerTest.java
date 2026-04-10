@@ -27,70 +27,70 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class IndexControllerTest {
 
-	IndexController indexController;
+    IndexController indexController;
 
-	@Mock
-	RecipeService recipeService;
+    @Mock
+    RecipeService recipeService;
 
-	@Mock
-	CategoryRepository categoryRepository;
+    @Mock
+    CategoryRepository categoryRepository;
 
-	@Mock
-	UnitOfMeasureRepository unitOfMeasureRepository;
+    @Mock
+    UnitOfMeasureRepository unitOfMeasureRepository;
 
-	@Mock
-	Model model;
+    @Mock
+    Model model;
 
-	@BeforeEach
-	public void setup() {
-		MockitoAnnotations.openMocks(this);
-		indexController = new IndexController(categoryRepository, unitOfMeasureRepository, recipeService);
-	}
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+        indexController = new IndexController(categoryRepository, unitOfMeasureRepository, recipeService);
+    }
 
-	@Test
-	void getIndexPageWithMockMvc() throws Exception {
-		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+    @Test
+    void getIndexPageWithMockMvc() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 
-		// Given
-		List<Recipe> recipes = new ArrayList<>();
-		Recipe recipe1 = new Recipe();
-		recipe1.setId(1L);
-		recipes.add(recipe1);
-		Recipe recipe2 = new Recipe();
-		recipe2.setId(2L);
-		when(recipeService.getAllRecipe()).thenReturn(recipes);
-		when(categoryRepository.findByDescription("American")).thenReturn(Optional.of(new Category()));
-		when(unitOfMeasureRepository.findByDescription("Teaspoon")).thenReturn(Optional.of(new UnitOfMeasure()));
+        // Given
+        List<Recipe> recipes = new ArrayList<>();
+        Recipe recipe1 = new Recipe();
+        recipe1.setId(1L);
+        recipes.add(recipe1);
+        Recipe recipe2 = new Recipe();
+        recipe2.setId(2L);
+        when(recipeService.getAllRecipe()).thenReturn(recipes);
+        when(categoryRepository.findByDescription("American")).thenReturn(Optional.of(new Category()));
+        when(unitOfMeasureRepository.findByDescription("Teaspoon")).thenReturn(Optional.of(new UnitOfMeasure()));
 
-		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("index"));
-	}
+        mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("index"));
+    }
 
-	@Test
-	void getIndexPage() {
+    @Test
+    void getIndexPage() {
 
-		// Given
-		List<Recipe> recipes = new ArrayList<>();
-		Recipe recipe1 = new Recipe();
-		recipe1.setId(1L);
-		recipes.add(recipe1);
-		Recipe recipe2 = new Recipe();
-		recipe2.setId(2L);
-		recipes.add(recipe2);
+        // Given
+        List<Recipe> recipes = new ArrayList<>();
+        Recipe recipe1 = new Recipe();
+        recipe1.setId(1L);
+        recipes.add(recipe1);
+        Recipe recipe2 = new Recipe();
+        recipe2.setId(2L);
+        recipes.add(recipe2);
 
-		// when
-		when(recipeService.getAllRecipe()).thenReturn(recipes);
-		when(categoryRepository.findByDescription("American")).thenReturn(Optional.of(new Category()));
-		when(unitOfMeasureRepository.findByDescription("Teaspoon")).thenReturn(Optional.of(new UnitOfMeasure()));
-		ArgumentCaptor<List<Recipe>> argumentCaptor = ArgumentCaptor.forClass(List.class);
+        // when
+        when(recipeService.getAllRecipe()).thenReturn(recipes);
+        when(categoryRepository.findByDescription("American")).thenReturn(Optional.of(new Category()));
+        when(unitOfMeasureRepository.findByDescription("Teaspoon")).thenReturn(Optional.of(new UnitOfMeasure()));
+        ArgumentCaptor<List<Recipe>> argumentCaptor = ArgumentCaptor.forClass(List.class);
 
-		String indexPage = indexController.getIndexPage(model);
+        String indexPage = indexController.getIndexPage(model);
 
-		// then
-		assertEquals("index", indexPage);
-		verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+        // then
+        assertEquals("index", indexPage);
+        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
 
-		List<Recipe> listOfRecipesInController = argumentCaptor.getValue();
-		assertEquals(2, listOfRecipesInController.size());
-	}
+        List<Recipe> listOfRecipesInController = argumentCaptor.getValue();
+        assertEquals(2, listOfRecipesInController.size());
+    }
 
 }
