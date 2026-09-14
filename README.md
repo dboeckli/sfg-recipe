@@ -9,20 +9,44 @@ This application is a Spring Boot-based recipe management system. It includes a 
 - Server-side rendering with Thymeleaf
 - Data persistence using H2 in-memory database
 
+## Architecture Overview
+
+```mermaid
+graph LR
+    Client(["🌐 Browser"])
+
+    subgraph App ["sfg-recipe :8080 / NodePort 30080"]
+        UI["Thymeleaf + Bootstrap\nWeb UI"]
+        MVC["Spring MVC\nController"]
+        Service["RecipeService"]
+        Repo["Spring Data JPA\nRepositories"]
+        Actuator["Actuator\nHealth / Metrics / Info"]
+    end
+
+    subgraph Observability ["Observability"]
+        OTel["Micrometer + OpenTelemetry\nTracing & Contextual Logging"]
+    end
+
+    subgraph Databases ["Databases"]
+        H2[("H2\nIn-Memory")]
+    end
+
+    Client <-->|"HTTP"| UI
+    Client <-->|"/actuator/*"| Actuator
+    UI --> MVC
+    MVC --> Service
+    Service --> Repo
+    Repo <--> H2
+    MVC -.-> OTel
+    Service -.-> OTel
+    Actuator -.-> OTel
+```
+
 ## Sandbox (local dev environment)
 
 The sandbox is provisioned by the [opencode-sandbox-kit](https://github.com/dboeckli/opencode-sandbox-kit)
 and runs as a Docker container (MicroVM). It mounts this repo, starts the agent, and connects the
 IntelliJ MCP server.
-
-### Prerequisites (host, once)
-
-```powershell
-sbx settings set kit.allowedSources --% "[\"docker.io/\",\"github.com/dboeckli/\"]"
-sbx mcp add idea --url http://localhost:64615/stream --skip-ssrf-check
-sbx secret set github
-sbx secret set github-maven
-```
 
 ### Start the sandbox (OpenCode)
 
@@ -73,7 +97,9 @@ normal host (Windows/CI) this does not apply.
 
 ## Build project
 
-with maven install a docker image is pushed to the docker repository with the image name local/sfg-recipe:0.0.1-SNAPSHOT
+During `./mvnw install` a Docker image is built locally (it is **not** pushed to a registry).
+Its name is `local/sfg-recipe:<chart-version>` (e.g. `local/sfg-recipe:0.0.1-snapshot.<git-sha>`)
+with the additional tag `local/sfg-recipe:development`.
 
 ### Deployment with Helm
 
@@ -82,7 +108,7 @@ Be aware that we are using a different namespace here (not default).
 To run maven filtering for destination target/helm
 
 ```bash
-mvn clean install -DskipTests 
+./mvnw clean install -DskipTests
 ```
 
 Go to the directory where the tgz file has been created after 'mvn install'
@@ -101,8 +127,9 @@ tar -xvf $file.Name
 install
 
 ```powershell
-$APPLICATION_NAME = Get-ChildItem -Directory | Where-Object { $_.LastWriteTime -ge $file.LastWriteTime } | Select-Object -ExpandProperty Name
-helm upgrade --install $APPLICATION_NAME ./$APPLICATION_NAME --namespace sfg-recipe --create-namespace --wait --timeout 8m --debug --render-subchart-notes
+$APPLICATION_NAME = "sfg-recipe"
+$CHART_DIR = "$APPLICATION_NAME-chart"
+helm upgrade --install $APPLICATION_NAME ./$CHART_DIR --namespace sfg-recipe --create-namespace --wait --timeout 8m --debug --render-subchart-notes
 ```
 
 show logs
@@ -135,17 +162,18 @@ delete all
 kubectl delete all --all -n sfg-recipe
 ```
 
-delete all
-
-```powershell
-kubectl delete all --all -n sfg-recipe
-```
-
 create busybox sidecar
 
 ```powershell
 kubectl run busybox-test --rm -it --image=busybox:1.36 --namespace=sfg-recipe --command -- sh
 ```
 
-You can use the actuator rest call to verify via port 30080
+You can use the actuator REST call to verify the deployment via the NodePort 30080:
+
+```powershell
+curl http://localhost:30080/actuator/health
+```
+
+Ready-made requests for all actuator endpoints are in `httpRequests/actuator.http` (use the `k8s`
+environment, port 30080).
 
