@@ -9,6 +9,68 @@ This application is a Spring Boot-based recipe management system. It includes a 
 - Server-side rendering with Thymeleaf
 - Data persistence using H2 in-memory database
 
+## Sandbox (local dev environment)
+
+The sandbox is provisioned by the [opencode-sandbox-kit](https://github.com/dboeckli/opencode-sandbox-kit)
+and runs as a Docker container (MicroVM). It mounts this repo, starts the agent, and connects the
+IntelliJ MCP server.
+
+### Prerequisites (host, once)
+
+```powershell
+sbx settings set kit.allowedSources --% "[\"docker.io/\",\"github.com/dboeckli/\"]"
+sbx mcp add idea --url http://localhost:64615/stream --skip-ssrf-check
+sbx secret set github
+sbx secret set github-maven
+```
+
+### Start the sandbox (OpenCode)
+
+```powershell
+sbx run opencode `
+    --kit "git+https://github.com/dboeckli/opencode-sandbox-kit.git#dir=opencode-agent" `
+    --template docker/sandbox-templates:opencode-docker-0.5.0 `
+    --no-share-skills `
+    --static-mcp idea `
+    . `
+    "$env:USERPROFILE\.kube:ro" `
+    "C:\development\maven-repo:ro"
+```
+
+Claude Code:
+
+```powershell
+sbx run claude `
+    --kit "git+https://github.com/dboeckli/opencode-sandbox-kit.git#dir=opencode-agent" `
+    --template docker/sandbox-templates:claude-code-docker-0.5.0 `
+    --no-share-skills `
+    --static-mcp idea `
+    . `
+    "$env:USERPROFILE\.kube:ro" `
+    "C:\development\maven-repo:ro"
+```
+
+Mammouth Code:
+
+```powershell
+sbx run "git+https://github.com/dboeckli/opencode-sandbox-kit.git#dir=mammouth-agent" `
+    --no-share-skills `
+    --static-mcp idea `
+    . `
+    "$env:USERPROFILE\.kube:ro" `
+    "C:\development\maven-repo:ro"
+```
+
+- `"$env:USERPROFILE\.kube:ro"` — optional Kubernetes support (kubectl/helm in the Docker Desktop cluster)
+- `"C:\development\maven-repo:ro"` — read-only host Maven cache (avoids re-downloading cached dependencies)
+
+### Sandbox quirk
+
+The sandbox mounts the repo via filesystem passthrough, which blocks symlinks — Spotless's
+`npm install` (prettier) fails with `EPERM` unless npm skips bin links. The kit sets
+`npm_config_bin_links=false` globally, so no manual export is needed inside the kit sandbox. On a
+normal host (Windows/CI) this does not apply.
+
 ## Build project
 
 with maven install a docker image is pushed to the docker repository with the image name local/sfg-recipe:0.0.1-SNAPSHOT
