@@ -94,7 +94,7 @@ cd target/helm/repo
 unpack
 
 ```powershell
-$file = Get-ChildItem -Filter sfg-recipe-v*.tgz | Select-Object -First 1
+$file = Get-ChildItem -Filter sfg-recipe-chart-*.tgz | Select-Object -First 1
 tar -xvf $file.Name
 ```
 
