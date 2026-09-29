@@ -44,7 +44,7 @@ graph LR
 
 ## Sandbox (local dev environment)
 
-The sandbox is provisioned by the [opencode-sandbox-kit](https://github.com/dboeckli/opencode-sandbox-kit)
+The sandbox is provisioned by the [opencode-sandbox-kit](https://codeberg.org/dboeckli/opencode-sandbox-kit)
 and runs as a Docker container (MicroVM). It mounts this repo, starts the agent, and connects the
 IntelliJ MCP server.
 
@@ -52,8 +52,8 @@ IntelliJ MCP server.
 
 ```powershell
 sbx run opencode `
-    --kit "git+https://github.com/dboeckli/opencode-sandbox-kit.git#dir=opencode-agent" `
-    --template docker.io/domboeckli/sbx-opencode-tooling:latest `
+    --kit "git+https://codeberg.org/dboeckli/opencode-sandbox-kit.git#dir=opencode-agent" `
+    --template docker.cloudsmith.io/dboeckli/sbx/sbx-opencode-tooling:latest `
     --skills=off `
     --static-mcp idea `
     . `
@@ -65,8 +65,8 @@ Claude Code:
 
 ```powershell
 sbx run claude `
-    --kit "git+https://github.com/dboeckli/opencode-sandbox-kit.git#dir=opencode-agent" `
-    --template docker.io/domboeckli/sbx-claude-tooling:latest `
+    --kit "git+https://codeberg.org/dboeckli/opencode-sandbox-kit.git#dir=opencode-agent" `
+    --template docker.cloudsmith.io/dboeckli/sbx/sbx-claude-tooling:latest `
     --skills=off `
     --static-mcp idea `
     . `
@@ -77,7 +77,7 @@ sbx run claude `
 Mammouth Code:
 
 ```powershell
-sbx run "git+https://github.com/dboeckli/opencode-sandbox-kit.git#dir=mammouth-agent" `
+sbx run "git+https://codeberg.org/dboeckli/opencode-sandbox-kit.git#dir=mammouth-agent" `
     --kit-arg imageTag=latest `
     --skills=off `
     --static-mcp idea `
